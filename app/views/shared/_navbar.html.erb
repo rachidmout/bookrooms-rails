@@ -1,0 +1,33 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container">
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center gap-2" do %>
+      <i class="fa-solid fa-hotel"></i>
+      <span>BookRooms</span>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Afficher la navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto align-items-center">
+          <li class="nav-item">
+            <%= link_to "Accueil", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Chambres", rooms_path, class: "nav-link" %>
+          </li>
+
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Se déconnecter", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-outline-primary ms-2" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+            <%= link_to "Se connecter", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

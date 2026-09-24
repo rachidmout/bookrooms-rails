@@ -1,0 +1,47 @@
+<div class="container py-5">
+  <div class="mb-5">
+    <span class="text-primary fw-bold">Nos offres</span>
+    <h1>Chambres disponibles</h1>
+    <p class="text-muted">
+      Découvrez nos chambres d’hôtel proposées à prix réduit.
+    </p>
+  </div>
+
+  <div class="row g-4">
+    <% @rooms.each do |room| %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="card-room">
+          <div class="card-room-visual">
+            <i class="fa-solid fa-bed"></i>
+            <span class="card-room-badge">Prix réduit</span>
+          </div>
+
+          <div class="card-room-content">
+            <h2><%= room.hotel.name %></h2>
+            <p class="text-muted">
+              <i class="fa-solid fa-location-dot"></i>
+              <%= room.hotel.address %>
+            </p>
+
+            <div class="card-room-details">
+              <span>
+                <i class="fa-solid fa-user-group"></i>
+                <%= room.capacity %> lit(s)
+              </span>
+
+              <strong><%= room.price_per_night %> € / nuit</strong>
+            </div>
+
+            <%= link_to "Voir la chambre",
+                        room_path(room),
+                        class: "btn btn-primary w-100 mt-3" %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="mt-5">
+    <%= link_to "Retour à l'accueil", root_path %>
+  </div>
+</div>

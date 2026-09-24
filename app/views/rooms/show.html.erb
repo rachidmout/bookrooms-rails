@@ -1,0 +1,65 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8">
+      <%= link_to "← Retour aux chambres", rooms_path, class: "text-decoration-none" %>
+
+      <div class="card border-0 shadow-sm mt-3">
+        <div class="card-body p-4">
+          <span class="badge bg-primary mb-3">Prix réduit</span>
+
+          <h1><%= @room.hotel.name %></h1>
+
+          <p class="text-muted">
+            <i class="fa-solid fa-location-dot"></i>
+            <%= @room.hotel.address %>
+          </p>
+
+          <div class="d-flex justify-content-between border-top border-bottom py-3 my-4">
+            <span>
+              <i class="fa-solid fa-bed"></i>
+              Capacité : <%= @room.capacity %> lit(s)
+            </span>
+
+            <strong><%= @room.price_per_night %> € / nuit</strong>
+          </div>
+
+          <h2 class="h4 mb-3">Réserver cette chambre</h2>
+
+          <% if @booking.errors.any? %>
+            <div class="alert alert-danger">
+              <ul class="mb-0">
+                <% @booking.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <%= form_with model: [@room, @booking] do |form| %>
+            <div class="mb-3" data-controller="datepicker">
+              <%= label_tag :date_range,
+                            "Dates du séjour",
+                            class: "form-label" %>
+
+              <%= text_field_tag :date_range,
+                                 nil,
+                                 placeholder: "Sélectionnez vos dates",
+                                 class: "form-control",
+                                 required: true,
+                                 data: { datepicker_target: "input" } %>
+
+              <%= form.hidden_field :starts_at,
+                                    data: { datepicker_target: "startDate" } %>
+
+              <%= form.hidden_field :ends_at,
+                                    data: { datepicker_target: "endDate" } %>
+            </div>
+
+            <%= form.submit "Réserver",
+                            class: "btn btn-primary w-100" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

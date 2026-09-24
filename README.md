@@ -1,38 +1,59 @@
-# HotelRooms — Product Discovery & Agile Delivery Case Study
+# BookRooms — Rails Hotel Booking MVP
 
-> **RNCP assessment exercise** — defining and organising the delivery of a hotel-room booking MVP.
+> A Ruby on Rails hotel-booking application developed as part of an RNCP assessment.
 
-HotelRooms is a project-management case study completed as part of the **Concepteur Développeur d’Applications** certification. The objective was to transform a product idea — a platform for booking discounted hotel rooms — into a structured, actionable delivery plan.
+BookRooms is a full-stack Ruby on Rails application for discovering hotel rooms at reduced prices and making date-based reservations. It was built from a functional brief and is presented here as a portfolio version of the assessment work.
 
-This repository intentionally focuses on the work completed **before and around development**: defining scope, shaping the backlog, sequencing the MVP and organising work with an Agile/Kanban approach. It is not a production codebase.
+## Features
 
-## MVP scope
+- Browse available hotel rooms with price, capacity and location details
+- View a dedicated room page
+- Create an account and sign in with Devise
+- Reserve a room through a date-range picker powered by Flatpickr
+- Receive validation feedback and booking confirmation messages
+- Maintain consistent Hotel, Room, Booking and User relationships
 
-The backlog covers the main building blocks of the platform:
+## Tech stack
 
-- Rails project setup and data modelling
-- Hotel and room management
-- User authentication
-- Search and filtering
-- Booking flow and “My bookings” area
-- Testing, bug fixing, deployment and documentation
+- Ruby 3.3
+- Ruby on Rails 8.1
+- PostgreSQL
+- Devise
+- Hotwire: Turbo and Stimulus
+- Bootstrap 5 and Sass
+- Flatpickr
 
-## What I delivered
+## Data model
 
-- Broke down the functional scope into **9 GitHub Issues**
-- Created and structured a prioritised MVP backlog
-- Sequenced work to reflect feature dependencies
-- Used a Kanban workflow to plan and monitor delivery
-- Defined a realistic path from setup to testing and release
+The application models a hotel-booking domain:
 
-## Skills demonstrated
+```
+Hotel has many Rooms
+Room belongs to Hotel and has many Bookings
+Booking belongs to a Room and a User
+User has many Bookings
+```
 
-`Product thinking` · `Requirements analysis` · `Backlog management` · `Prioritisation` · `Kanban` · `Agile delivery` · `GitHub Issues`
+Model validations enforce required hotel details, positive room capacity and nightly price, and complete booking dates. Dependent deletion rules keep the database consistent.
 
-## Backlog
+## Product delivery
 
-The [issue backlog](../../issues) records the planned MVP work items and their delivery sequence.
+This repository combines the application with the product-delivery artefacts created for the project: backlog, feature sequencing and roadmap. The [Issues](../../issues) tab preserves this planning work.
 
-## Status
+Some issues document planned extensions beyond the assessment scope; the implemented features are those described above.
 
-**Completed assessment exercise.** This repository preserves the project-planning artefacts; application source code was not part of this public showcase.
+See [project-management notes](docs/project-management.md) for context.
+
+## Run locally
+
+```bash
+bundle install
+bin/rails db:create db:migrate db:seed
+bin/dev
+```
+
+Then visit `http://localhost:3000`.
+
+## Context
+
+This is an independently published portfolio copy of an RNCP assessment project. The original evaluation repository, its history and local configuration are not included.
